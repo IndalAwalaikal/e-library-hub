@@ -23,7 +23,8 @@ const BookCard = ({ book, className }: BookCardProps) => {
     <Link
       to={`/book/${book.id}`}
       className={cn(
-        "group block overflow-hidden rounded-lg bg-card card-shadow transition-all duration-300 hover:card-shadow-hover hover:-translate-y-1",
+        // ⬇️ TAMBAH flex & h-full
+        "group flex h-full flex-col overflow-hidden rounded-lg bg-card card-shadow transition-all duration-300 hover:card-shadow-hover hover:-translate-y-1",
         className
       )}
     >
@@ -45,17 +46,30 @@ const BookCard = ({ book, className }: BookCardProps) => {
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        <Badge variant="secondary" className="mb-2 text-xs">
+      {/* ⬇️ flex-1 + flex-col */}
+      <div className="flex flex-1 flex-col p-4">
+        <Badge variant="secondary" className="mb-2 w-fit text-xs">
           {book.category}
         </Badge>
+
         <h3 className="mb-1 font-display font-semibold text-card-foreground line-clamp-2 group-hover:text-secondary transition-colors">
           {book.title}
         </h3>
-        <p className="mb-2 text-sm text-muted-foreground">{book.author}</p>
+
+        {/* ⬇️ clamp author */}
+        <p className="mb-2 text-sm text-muted-foreground line-clamp-1">
+          {book.author}
+        </p>
+
+        {/* ⬇️ SPACER PENTING */}
+        <div className="flex-1" />
+
+        {/* Footer / Rating */}
         <div className="flex items-center gap-1">
           <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-          <span className="text-sm font-medium text-card-foreground">{book.rating.toFixed(1)}</span>
+          <span className="text-sm font-medium text-card-foreground">
+            {book.rating.toFixed(1)}
+          </span>
           <span className="text-xs text-muted-foreground">• {book.year}</span>
         </div>
       </div>

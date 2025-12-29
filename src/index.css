@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,34 +9,38 @@
     /* E-Library Color Palette */
     --background: 210 40% 98%; /* Off-white #F8FAFC */
     --foreground: 222 47% 11%; /* Dark Gray #0F172A */
-    
+
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    
+
     --primary: 217 33% 17%; /* Dark Blue/Indigo #1E293B */
     --primary-foreground: 210 40% 98%;
-    
+
     --secondary: 199 89% 48%; /* Soft Blue #38BDF8 */
     --secondary-foreground: 222 47% 11%;
-    
+
     --accent: 160 84% 39%; /* Emerald #10B981 */
     --accent-foreground: 0 0% 100%;
-    
+
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
+
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 217 33% 17%;
-    
+
     --radius: 0.75rem;
-    
+
+    /* Default chart height (can be overridden per-container via chartHeight prop or --chart-height)
+     Keep reasonably short for compact cards and increase via media query for larger viewports. */
+    --chart-height: 160px;
+
     /* Sidebar */
     --sidebar-background: 217 33% 17%;
     --sidebar-foreground: 210 40% 98%;
@@ -47,36 +51,36 @@
     --sidebar-border: 217 33% 25%;
     --sidebar-ring: 199 89% 48%;
   }
-  
+
   .dark {
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
-    
+
     --card: 217 33% 17%;
     --card-foreground: 210 40% 98%;
-    
+
     --popover: 217 33% 17%;
     --popover-foreground: 210 40% 98%;
-    
+
     --primary: 199 89% 48%;
     --primary-foreground: 222 47% 11%;
-    
+
     --secondary: 217 33% 25%;
     --secondary-foreground: 210 40% 98%;
-    
+
     --accent: 160 84% 39%;
     --accent-foreground: 0 0% 100%;
-    
+
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
-    
+
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
-    
+
     --border: 217 33% 25%;
     --input: 217 33% 25%;
     --ring: 199 89% 48%;
-    
+
     --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 210 40% 98%;
     --sidebar-primary: 199 89% 48%;
@@ -92,55 +96,177 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Poppins", sans-serif;
   }
 }
 
 @layer components {
+  /* Gradient Styles */
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--secondary))
+    );
   }
-  
+
   .gradient-hero {
-    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--muted)) 100%
+    );
   }
-  
+
+  .gradient-accent {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--secondary)),
+      hsl(var(--accent))
+    );
+  }
+
+  /* Shadow Styles - Modern & Professional */
   .card-shadow {
-    box-shadow: 0 4px 20px -4px hsl(217 33% 17% / 0.08);
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.08),
+      0 4px 20px -4px rgba(15, 23, 42, 0.08);
   }
-  
+
   .card-shadow-hover {
-    box-shadow: 0 8px 30px -6px hsl(217 33% 17% / 0.15);
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.1),
+      0 8px 40px -6px rgba(15, 23, 42, 0.15);
   }
-  
+
+  .card-shadow-lg {
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.1),
+      0 20px 60px -8px rgba(15, 23, 42, 0.2);
+  }
+
+  /* Text Styles */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--secondary))
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  /* Backdrop Blur & Glass Effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .glass-effect-dark {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(16px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Smooth Transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-smooth-lg {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px -8px rgba(15, 23, 42, 0.2);
+  }
+
+  /* Focus Ring - Accessible */
+  .focus-ring {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: all 0.2s;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {
+  /* Animation Classes */
   .animate-fade-in {
     animation: fade-in 0.5s ease-out forwards;
   }
-  
+
   .animate-slide-up {
     animation: slide-up 0.5s ease-out forwards;
   }
-  
+
+  .animate-slide-down {
+    animation: slide-down 0.5s ease-out forwards;
+  }
+
+  .animate-slide-left {
+    animation: slide-left 0.5s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slide-right 0.5s ease-out forwards;
+  }
+
   .animate-scale-in {
     animation: scale-in 0.3s ease-out forwards;
   }
-  
+
+  .animate-bounce-in {
+    animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  /* Stagger Animation Delays */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /* Keyframes */
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -151,7 +277,7 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes slide-up {
     from {
       opacity: 0;
@@ -162,7 +288,40 @@
       transform: translateY(0);
     }
   }
-  
+
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-left {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-right {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   @keyframes scale-in {
     from {
       opacity: 0;
@@ -172,5 +331,52 @@
       opacity: 1;
       transform: scale(1);
     }
+  }
+
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+/* Responsive adjustments for default chart height */
+@media (min-width: 1024px) {
+  :root {
+    --chart-height: 200px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --chart-height: 240px;
   }
 }
