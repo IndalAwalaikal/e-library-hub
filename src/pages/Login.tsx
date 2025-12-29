@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const Login = () => {
+const Login = forwardRef<HTMLDivElement>((_, ref) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +18,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div ref={ref} className="min-h-screen flex">
       {/* Left Side - Form */}
       <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -122,6 +122,8 @@ const Login = () => {
       </div>
     </div>
   );
-};
+});
+
+Login.displayName = "Login";
 
 export default Login;
